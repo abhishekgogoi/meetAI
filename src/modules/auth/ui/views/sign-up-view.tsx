@@ -4,7 +4,7 @@ import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { OctagonAlertIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
-// import { FaGithub, FaGoogle } from "react-icons/fa";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import { z } from "zod";
 
 import { Alert, AlertTitle } from "@/components/ui/alert";
@@ -68,25 +68,25 @@ export const SignUpView = () => {
     );
   };
 
-  // const onSocial = async (provider: "google" | "github") => {
-  //   setError(null);
-  //   setPending(true);
-  //   await authClient.signIn.social(
-  //     {
-  //       provider: provider,
-  //       callbackURL: "/",
-  //     },
-  //     {
-  //       onSuccess: () => {
-  //         setPending(false);
-  //       },
-  //       onError: ({ error }) => {
-  //         setPending(false);
-  //         setError(error.message);
-  //       },
-  //     }
-  //   );
-  // };
+  const onSocial = async (provider: "google" | "github") => {
+    setError(null);
+    setPending(true);
+    await authClient.signIn.social(
+      {
+        provider: provider,
+        callbackURL: "/",
+      },
+      {
+        onSuccess: () => {
+          setPending(false);
+        },
+        onError: ({ error }) => {
+          setPending(false);
+          setError(error.message);
+        },
+      }
+    );
+  };
 
   return (
     <div className="flex flex-col gap-6">
@@ -180,7 +180,7 @@ export const SignUpView = () => {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  {/* <Button
+                  <Button
                     onClick={() => onSocial("google")}
                     disabled={pending}
                     type="button"
@@ -188,9 +188,9 @@ export const SignUpView = () => {
                     className="w-full"
                   >
                     <FaGoogle />
-                  </Button> */}
+                  </Button>
 
-                  {/* <Button
+                  <Button
                     onClick={() => onSocial("github")}
                     disabled={pending}
                     type="button"
@@ -198,7 +198,7 @@ export const SignUpView = () => {
                     className="w-full"
                   >
                     <FaGithub />
-                  </Button> */}
+                  </Button>
                 </div>
 
                 <div className="text-center text-sm">
